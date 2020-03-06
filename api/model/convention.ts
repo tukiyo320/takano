@@ -3,6 +3,7 @@ interface Convention {
   title: string,
   type: string,
   versions: Array<string>,
+  tags: string,
   hold_date: Date,
   start_at: Date,
   area: string,
