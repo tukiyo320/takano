@@ -2,6 +2,7 @@
   <v-app>
     <v-app-bar
       :clipped-left="clipped"
+      color="primary"
       app
       fixed
     >
