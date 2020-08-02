@@ -21,10 +21,11 @@
     "sanitize-html": "^1.27.2"
   },
   "devDependencies": {
-    "@nuxt/typescript-build": "^0.6.0",
+    "@nuxt/typescript-build": "^2.0.2",
     "@nuxtjs/date-fns": "^1.2.0",
     "@nuxtjs/vuetify": "^1.9.1",
     "@vue/test-utils": "^1.0.0-beta.27",
+    "@nuxt/types": "^2.14.0",
     "babel-jest": "^24.9.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-prettier": "^3.1.2",
