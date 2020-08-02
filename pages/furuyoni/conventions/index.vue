@@ -23,6 +23,11 @@ export default Vue.extend({
       }
     }
   },
+  head() {
+    return {
+      title: this.header.title
+    }
+  },
   mounted() {
     this.updateHeader()
   },
