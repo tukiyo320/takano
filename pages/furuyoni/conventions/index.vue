@@ -15,6 +15,21 @@ import Vue from 'vue';
 export default Vue.extend({
   components: {
     ConventionTable
+  },
+  data() {
+    return {
+      header: {
+        title: '『桜降る代に決闘を』イベント一覧'
+      }
+    }
+  },
+  mounted() {
+    this.updateHeader()
+  },
+  methods: {
+    updateHeader() {
+      this.$nuxt.$emit('updateHeader', this.header.title)
+    }
   }
 })
 </script>

@@ -32,7 +32,9 @@
 </template>
 
 <script lang="ts">
-  export default {
+  import Vue from 'vue'
+
+  export default Vue.extend({
     data() {
       return {
         clipped: false,
@@ -50,8 +52,19 @@
           }
         ]
       }
+    },
+    created() {
+      this.setListener()
+    },
+    methods: {
+      setListener() {
+        this.$nuxt.$on('updateHeader', this.setHeader)
+      },
+      setHeader(title: string) {
+        this.title = title || ''
+      }
     }
-  }
+  })
 </script>
 
 <style>
