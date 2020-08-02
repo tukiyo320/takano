@@ -2,10 +2,17 @@
   <v-app>
     <v-navigation-drawer v-model="isDrawerOpen" app temporary>
       <v-list dense nav class="py-0">
-        <v-subheader>リンク</v-subheader>
-        <v-list-item v-for="item in menu" :key="item.title" :href="item.href" target="_blank">
+        <v-subheader>メニュー</v-subheader>
+        <v-list-item @click="$refs.aboutDialog.isDisplay = true">
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>このサイトについて</v-list-item-title>
+            <about-dialog ref="aboutDialog"></about-dialog>
+          </v-list-item-content>
+        </v-list-item>
+        <v-subheader>リンク</v-subheader>
+        <v-list-item v-for="link in links" :key="link.title" :href="link.href" target="_blank">
+          <v-list-item-content>
+            <v-list-item-title>{{ link.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -33,15 +40,20 @@
 
 <script lang="ts">
   import Vue from 'vue'
+  import AboutDialog from '~/components/AboutDialog'
 
   export default Vue.extend({
+    components: {
+      AboutDialog
+    },
     data() {
       return {
         clipped: false,
         fixed: false,
         title: 'Takano',
         isDrawerOpen: false,
-        menu: [
+        isAboutOpen: false,
+        links: [
           {
             title: '新幕・桜降る代に決闘を公式',
             href: 'https://main-bakafire.ssl-lolipop.jp/furuyoni/na/index.html'
