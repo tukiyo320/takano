@@ -15,6 +15,8 @@
       :items="conventions"
       :loading="isLoading"
       :search="search"
+      single-expand
+      show-expand
       hide-default-footer
       item-key="id"
       loading-text="読込中..."
@@ -25,12 +27,25 @@
       <template v-slot:item.created_at="data">
         {{ data.value ? $dateFns.format(data.value, 'yyyy-MM-dd') : '' }}
       </template>
+      <template v-slot:expanded-item="{ headers, item }">
+        <td :colspan="headers.length" class="py-2">
+          <span class="font-weight-bold">会場：</span>{{ item.site }}（{{ item.site_address }}）<br>
+          <span class="font-weight-bold">会費：</span>{{ item.fee }}円<br>
+          <span class="font-weight-bold">開始時間：</span>{{ item.start_at }}<br>
+          <span class="font-weight-bold">当日受付：</span>{{ item.a_day_entry }}<br>
+          <span class="font-weight-bold">予約方法：</span><br>
+          <div v-html="autoLink(sanitize(item.reserve_description))" style="white-space:pre-wrap; word-wrap:break-word;"></div>
+          <span class="font-weight-bold">コメント：</span><br>
+          <div v-html="autoLink(sanitize(item.comment))" style="white-space:pre-wrap; word-wrap:break-word;"></div>
+        </td>
+      </template>
     </v-data-table>
   </v-container>
 </template>
 
 <script lang="ts">
   import Vue from 'vue'
+  import sanitizeHtml from 'sanitize-html'
 
   export default Vue.extend({
     name: 'ConventionTable',
@@ -69,6 +84,10 @@
             value: 'area',
             text: '地域',
             width: '10%'
+          },
+          {
+            value: 'data-table-expand',
+            text: ''
           }
         ]
       }
@@ -89,6 +108,19 @@
         .finally(() => {
           this.isLoading = false
         })
+    },
+    methods: {
+      sanitize(text: string): string {
+        return sanitizeHtml(text)
+      },
+      autoLink(str: string): string {
+        const regexp_url = /((h?)(ttps?:\/\/[a-zA-Z0-9.\-_@:/~?%&;=+#',()*!]+))/g;
+        const regexpMakeLink = function (url: string) {
+          return '<a href="' + url + '" target="_blank">' + url + '</a>';
+        };
+
+        return str.replace(regexp_url, regexpMakeLink);
+      }
     }
   })
 </script>
