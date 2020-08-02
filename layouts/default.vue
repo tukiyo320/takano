@@ -40,7 +40,7 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import AboutDialog from '~/components/AboutDialog'
+  import AboutDialog from '~/components/AboutDialog.vue'
 
   export default Vue.extend({
     components: {
