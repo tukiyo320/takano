@@ -2,7 +2,7 @@ import colors from 'vuetify/es5/util/colors'
 require('dotenv').config()
 
 export default {
-  mode: 'spa',
+  ssr: false,
   env: {
     OUKA_API_BASE_URL: process.env.OUKA_API_BASE_URL || 'https://5w32i50qy8.execute-api.us-west-2.amazonaws.com/dev'
   },
